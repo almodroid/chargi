@@ -20,6 +20,17 @@ struct BatteryReading: Equatable {
         }
     }
 
+    var menuBarText: String {
+        if isFullyCharged { return "\(percentage)% · Full" }
+        if isCharging {
+            if let t = timeToFullCharge { return "\(percentage)% · \(format(minutes: t))" }
+            return "\(percentage)%"
+        } else {
+            if let t = timeToEmpty { return "\(percentage)% · \(format(minutes: t))" }
+            return "\(percentage)%"
+        }
+    }
+
     private func format(minutes: Int) -> String {
         let h = minutes / 60
         let m = minutes % 60

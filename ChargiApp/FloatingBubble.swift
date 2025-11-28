@@ -9,39 +9,51 @@ final class BubbleViewModel: ObservableObject {
 struct BubbleView: View {
     @ObservedObject var model: BubbleViewModel
     @State private var offset: CGFloat = -30
+    @State private var boltPulse: Bool = false
 
     var body: some View {
-        Text(model.text)
-            .font(.system(size: 14, weight: .semibold))
-            .foregroundColor(.white)
-            .lineLimit(1)
-            .fixedSize(horizontal: true, vertical: true)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
-            .background(
-                ZStack {
-                    LinearGradient(colors: [Color.green.opacity(0.8), Color.blue.opacity(0.8)], startPoint: .leading, endPoint: .trailing)
-                        .offset(x: offset)
-                        .frame(height: 28)
-                        .clipShape(Capsule())
-                    Capsule()
-                        .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                }
-            )
-            .scaleEffect(model.isCharging ? 1.03 : 1.0)
-            .onAppear {
-                if model.isCharging {
-                    withAnimation(.linear(duration: 4).repeatForever(autoreverses: true)) { offset = 30 }
-                }
+        HStack(spacing: 6) {
+            if model.isCharging {
+                Image(systemName: "bolt.fill")
+                    .foregroundColor(.yellow)
+                    .opacity(boltPulse ? 1.0 : 0.5)
             }
-            .onChange(of: model.isCharging) { charging in
-                if charging {
-                    offset = -30
-                    withAnimation(.linear(duration: 4).repeatForever(autoreverses: true)) { offset = 30 }
-                } else {
-                    withAnimation(.easeOut(duration: 0.3)) { offset = 0 }
-                }
+            Text(model.text)
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundColor(.white)
+                .lineLimit(1)
+                .fixedSize(horizontal: true, vertical: true)
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .background(
+            ZStack {
+                LinearGradient(colors: [Color.green.opacity(0.8), Color.blue.opacity(0.8)], startPoint: .leading, endPoint: .trailing)
+                    .offset(x: offset)
+                    .frame(height: 28)
+                    .clipShape(Capsule())
+                Capsule()
+                    .stroke(Color.white.opacity(0.2), lineWidth: 1)
             }
+        )
+        .scaleEffect(model.isCharging ? 1.03 : 1.0)
+        .onAppear {
+            if model.isCharging {
+                withAnimation(.linear(duration: 4).repeatForever(autoreverses: true)) { offset = 30 }
+                boltPulse = true
+            }
+        }
+        .onChange(of: model.isCharging) { charging in
+            if charging {
+                offset = -30
+                withAnimation(.linear(duration: 4).repeatForever(autoreverses: true)) { offset = 30 }
+                boltPulse = true
+            } else {
+                withAnimation(.easeOut(duration: 0.3)) { offset = 0 }
+                boltPulse = false
+            }
+        }
+        .animation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: boltPulse)
     }
 }
 

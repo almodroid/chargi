@@ -26,9 +26,14 @@ final class StatusBarController {
     private func updateStatus(reading: BatteryReading) {
         guard let button = statusItem.button else { return }
         if preferences?.showMenuBarTime == true {
-            button.title = reading.displayText
-            button.image = nil
-            stopPulse()
+            button.title = reading.menuBarText
+            button.imagePosition = .imageLeading
+            if reading.isCharging {
+                startPulse()
+            } else {
+                stopPulse()
+                button.image = IconFactory.batteryIcon()
+            }
         } else {
             button.title = ""
             if reading.isCharging {
