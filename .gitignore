@@ -1,0 +1,26 @@
+# Build artifacts
+build/
+dist/
+
+# Swift Package Manager
+.build/
+
+# Xcode user-specific data
+DerivedData/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcuserstate
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Trae IDE workspace
+.trae/
+
+# Logs and environment files
+*.log
+.env*
+
