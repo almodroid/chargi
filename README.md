@@ -28,10 +28,40 @@ Chargi is a minimal, focused macOS menu bar app that shows charging status and t
 
 ## Building
 
-- Requires macOS with Xcode command line tools.
-- Build script compiles a standalone AppKit binary and creates a `.app` bundle and `.dmg`:
-  - `scripts/package_app.sh`
-  - Output: `dist/Chargi.app`, `dist/Chargi.dmg`
+### Prerequisites
+- macOS with Xcode Command Line Tools installed (`xcode-select --install`).
+- Uses built‑in macOS tools: `xcodebuild`, `iconutil`, `hdiutil`.
+
+### Quick Build (no Xcode project)
+- Run: `zsh scripts/package_app.sh`
+- Produces:
+  - App: `dist/Chargi.app`
+  - DMG: `dist/Chargi.dmg`
+- Open the app: `open dist/Chargi.app`
+
+### Build With Xcode (includes widget extension)
+- Create an Xcode project/workspace and add a Widget Extension target.
+- In both App and Widget targets, enable App Group `group.chargi.app` under Signing & Capabilities.
+- Build via script (it auto‑detects project/workspace and copies `.appex`):
+  - `SCHEME=Chargi PROJECT=Chargi.xcodeproj zsh scripts/package_app.sh`
+  - or `SCHEME=Chargi WORKSPACE=Chargi.xcworkspace zsh scripts/package_app.sh`
+- Optional: `CONFIGURATION=Release` (default is `Release`).
+- Outputs:
+  - App: `build/XcodeDerived/Build/Products/Release/Chargi.app`
+  - DMG: `dist/Chargi.dmg`
+
+### Script Behavior
+- Icon preparation: converts PNGs into `.icns` and embeds in the bundle.
+  - Preferred: place PNGs in `AppIcon.appiconset/` (e.g., `icon-16.png`, `icon-32.png`, `icon-64.png`, `icon-128.png`, `icon-256.png`, `icon-512.png`, `icon-1024.png`).
+  - Also supported: `Assets.xcassets/AppIcon.appiconset/` or `Assets/AppIcon.iconset/`.
+  - If assets are missing, the script attempts to generate icons programmatically.
+- Packaging: builds the app, copies any `.appex` (widget) into `Contents/PlugIns/`, and creates the DMG with an `/Applications` link.
+
+### Script Variables
+- `SCHEME`: Xcode scheme to build (default `Chargi`).
+- `PROJECT`: `.xcodeproj` path.
+- `WORKSPACE`: `.xcworkspace` path.
+- `CONFIGURATION`: `Release` or `Debug` (default `Release`).
 
 ## Icons
 
