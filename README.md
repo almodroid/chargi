@@ -1,4 +1,4 @@
-# <img src="AppIcon.appiconset/Icon-128.png" alt="Chargi Icon" width="32" height="32"> Chargi
+# <img src="AppIcon.appiconset/icon-128.png" alt="Chargi Icon" width="32" height="32"> Chargi
 
 Chargi is a minimal, focused macOS menu bar app that shows charging status and time remaining, with a floating bubble and a widget. It’s lightweight, private, and stays out of your way.
 
