@@ -5,6 +5,8 @@ final class Preferences {
     private let showBubbleKey = "pref.showFloatingBubble"
     private let enableWidgetKey = "pref.enableWidgetContent"
     private let showMenuBarTimeKey = "pref.showMenuBarTime"
+    private let promptedMoveKey = "pref.promptedMoveToApplications"
+    private let launchAtLoginKey = "pref.launchAtLogin"
     private let appGroup = "group.chargi.app"
 
     var showFloatingBubble: Bool {
@@ -22,6 +24,16 @@ final class Preferences {
         set { defaults.set(newValue, forKey: showMenuBarTimeKey) }
     }
 
+    var promptedMoveToApplications: Bool {
+        get { defaults.object(forKey: promptedMoveKey) as? Bool ?? false }
+        set { defaults.set(newValue, forKey: promptedMoveKey) }
+    }
+
+    var launchAtLogin: Bool {
+        get { defaults.object(forKey: launchAtLoginKey) as? Bool ?? false }
+        set { defaults.set(newValue, forKey: launchAtLoginKey) }
+    }
+
     func syncToAppGroup() {
         if let shared = UserDefaults(suiteName: appGroup) {
             shared.set(showFloatingBubble, forKey: showBubbleKey)
@@ -30,4 +42,3 @@ final class Preferences {
         }
     }
 }
-

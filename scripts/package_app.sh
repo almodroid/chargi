@@ -40,6 +40,38 @@ function prepare_icons() {
       cp -f "$SRC_APPICONSET_ROOT/icon-512.png" "$DEST_ICONSET/icon_512x512.png"
     }
     [[ -f "$SRC_APPICONSET_ROOT/icon-1024.png" ]] && cp -f "$SRC_APPICONSET_ROOT/icon-1024.png" "$DEST_ICONSET/icon_512x512@2x.png"
+    [[ -f "$SRC_APPICONSET_ROOT/16.png" ]] && cp -f "$SRC_APPICONSET_ROOT/16.png" "$DEST_ICONSET/icon_16x16.png"
+    [[ -f "$SRC_APPICONSET_ROOT/32.png" ]] && {
+      cp -f "$SRC_APPICONSET_ROOT/32.png" "$DEST_ICONSET/icon_16x16@2x.png"
+      cp -f "$SRC_APPICONSET_ROOT/32.png" "$DEST_ICONSET/icon_32x32.png"
+    }
+    [[ -f "$SRC_APPICONSET_ROOT/64.png" ]] && cp -f "$SRC_APPICONSET_ROOT/64.png" "$DEST_ICONSET/icon_32x32@2x.png"
+    [[ -f "$SRC_APPICONSET_ROOT/128.png" ]] && cp -f "$SRC_APPICONSET_ROOT/128.png" "$DEST_ICONSET/icon_128x128.png"
+    [[ -f "$SRC_APPICONSET_ROOT/256.png" ]] && {
+      cp -f "$SRC_APPICONSET_ROOT/256.png" "$DEST_ICONSET/icon_128x128@2x.png"
+      cp -f "$SRC_APPICONSET_ROOT/256.png" "$DEST_ICONSET/icon_256x256.png"
+    }
+    [[ -f "$SRC_APPICONSET_ROOT/512.png" ]] && {
+      cp -f "$SRC_APPICONSET_ROOT/512.png" "$DEST_ICONSET/icon_256x256@2x.png"
+      cp -f "$SRC_APPICONSET_ROOT/512.png" "$DEST_ICONSET/icon_512x512.png"
+    }
+    [[ -f "$SRC_APPICONSET_ROOT/1024.png" ]] && cp -f "$SRC_APPICONSET_ROOT/1024.png" "$DEST_ICONSET/icon_512x512@2x.png"
+    [[ -f "$SRC_APPICONSET_ROOT/Icon-16.png" ]] && cp -f "$SRC_APPICONSET_ROOT/Icon-16.png" "$DEST_ICONSET/icon_16x16.png"
+    [[ -f "$SRC_APPICONSET_ROOT/Icon-32.png" ]] && {
+      cp -f "$SRC_APPICONSET_ROOT/Icon-32.png" "$DEST_ICONSET/icon_16x16@2x.png"
+      cp -f "$SRC_APPICONSET_ROOT/Icon-32.png" "$DEST_ICONSET/icon_32x32.png"
+    }
+    [[ -f "$SRC_APPICONSET_ROOT/Icon-64.png" ]] && cp -f "$SRC_APPICONSET_ROOT/Icon-64.png" "$DEST_ICONSET/icon_32x32@2x.png"
+    [[ -f "$SRC_APPICONSET_ROOT/Icon-128.png" ]] && cp -f "$SRC_APPICONSET_ROOT/Icon-128.png" "$DEST_ICONSET/icon_128x128.png"
+    [[ -f "$SRC_APPICONSET_ROOT/Icon-256.png" ]] && {
+      cp -f "$SRC_APPICONSET_ROOT/Icon-256.png" "$DEST_ICONSET/icon_128x128@2x.png"
+      cp -f "$SRC_APPICONSET_ROOT/Icon-256.png" "$DEST_ICONSET/icon_256x256.png"
+    }
+    [[ -f "$SRC_APPICONSET_ROOT/Icon-512.png" ]] && {
+      cp -f "$SRC_APPICONSET_ROOT/Icon-512.png" "$DEST_ICONSET/icon_256x256@2x.png"
+      cp -f "$SRC_APPICONSET_ROOT/Icon-512.png" "$DEST_ICONSET/icon_512x512.png"
+    }
+    [[ -f "$SRC_APPICONSET_ROOT/Icon-1024.png" ]] && cp -f "$SRC_APPICONSET_ROOT/Icon-1024.png" "$DEST_ICONSET/icon_512x512@2x.png"
   elif [[ -d "$SRC_APPICONSET" ]]; then
     find "$SRC_APPICONSET" -maxdepth 1 -name 'icon_*.png' -exec cp -f {} "$DEST_ICONSET/" \; 2>/devnull || true
   elif [[ -d "$SRC_ICONSET_ALT" ]]; then
